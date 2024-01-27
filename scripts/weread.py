@@ -211,14 +211,14 @@ def append_blocks(id, contents):
 def content_to_block(content):
     if "bookmarkId" in content:
         return get_callout(
-            content.get("markText"),
+            content.get("markText",""),
             content.get("style"),
             content.get("colorStyle"),
             content.get("reviewId"),
         )
     elif "reviewId" in content:
         return get_callout(
-            content.get("content"),
+            content.get("content",""),
             content.get("style"),
             content.get("colorStyle"),
             content.get("reviewId"),
@@ -265,7 +265,7 @@ if __name__ == "__main__":
             if sort == notion_books.get(bookId).get("Sort"):
                 continue
             pageId = notion_books.get(bookId).get("pageId")
-            print(f"正在同步《{title}》,一共{len(books)}本，当前是第{index+1}本。{pageId}")
+            print(f"正在同步《{title}》,一共{len(books)}本，当前是第{index+1}本。")
             chapter = weread_api.get_chapter_info(bookId)
             bookmark_list = get_bookmark_list(pageId, bookId)
             reviews = get_review_list(pageId,bookId)
